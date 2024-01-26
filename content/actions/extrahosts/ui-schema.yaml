@@ -1,0 +1,12 @@
+uiSchema:
+  # UI schema
+  buttonGroup:
+    string:
+      'ui:widget': button-group
+    number:
+      'ui:widget': button-group
+  radio:
+    string:
+      'ui:widget': radio
+    number:
+      'ui:widget': radio
