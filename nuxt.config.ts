@@ -1,8 +1,20 @@
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify"
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  build: {
+    transpile: ["vuetify"]
+  },
   devtools: { enabled: false },
+  ssr: false, // Disable Server Side rendering
   modules: [
-    '@nuxt/content'
+    "@nuxt/content",
+    (_options, nuxt) => {
+      nuxt.hooks.hook("vite:extendConfig", (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    }
   ],
   content: {
     // watch: {
@@ -11,6 +23,13 @@ export default defineNuxtConfig({
     //     showUrl: true
     //   }
     // }
-    watch: false,
-  }
+    watch: false
+  },
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
 })
