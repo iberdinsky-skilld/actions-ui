@@ -1,21 +1,57 @@
 <script setup>
 
-const schema = ref([])
+const uiSchema = ref({})
+const schemaRoute = ref([])
 const route = useRoute()
-console.log(route.params.slug);
-schema.value = route.params.slug
-schema.value[schema.value.length - 1] = "ui-schema"
+schemaRoute.value = route.params.slug
+schemaRoute.value[schemaRoute.value.length - 1] = "ui-schema"
+const schemes = await queryContent(...schemaRoute.value).find()
 
-const schemes = await queryContent(...schema.value).find()
-console.log(schemes);
+uiSchema.value = schemes.length ? schemes[0].uiSchema : {}
+
 </script>
 <template>
-  <ContentDoc v-slot="{ doc }">
-    <article>
-      <h1>{{ doc.title }}</h1>
-      <code>
-        {{ doc.action }}
-      </code>
-    </article>
-  </ContentDoc>
+  <v-container>
+
+    <ContentDoc v-slot="{ doc }">
+      <div class="content-doc">
+        <v-expansion-panels>
+          <v-expansion-panel title="Action source">
+            <v-expansion-panel-text>
+              <pre><code>{{ doc.action }}</code></pre>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+          <v-expansion-panel title="UI Schema source">
+            <v-expansion-panel-text>
+              <pre><code>{{ uiSchema }}</code></pre>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
+
+        <template v-if="doc.action.arguments">
+          <h2 class="text-h5">Arguments</h2>
+          <ActionForm :schema="{
+            type: 'object',
+            properties: doc.action.arguments
+          }" :uiSchema="uiSchema" />
+        </template>
+
+        <template v-if="doc.action.options">
+          <h2 class="text-h5">Options</h2>
+          <ActionForm :schema="{
+            type: 'object',
+            properties: doc.action.options
+          }" :uiSchema="uiSchema" />
+        </template>
+      </div>
+
+    </ContentDoc>
+  </v-container>
 </template>
+
+<style>
+.content-doc {
+  display: grid;
+  gap: 24px;
+}
+</style>

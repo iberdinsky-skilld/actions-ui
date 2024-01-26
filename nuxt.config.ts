@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   ssr: false, // Disable Server Side rendering
   modules: [
     "@nuxt/content",
+    ['@nuxtjs/google-fonts', {
+      families: {
+        Roboto: true,
+      }
+    }],
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -32,4 +37,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => ['jsf-shoelace'].includes(tag),
+    },
+  }
 })

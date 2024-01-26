@@ -1,5 +1,0 @@
-uiSchema:
-  # UI schema
-  textArea:
-    'ui:widget': customtextarea
-    'ui:placeholder': This is a placeholder
