@@ -10,3 +10,4 @@ run:
 # git co ui-schemes
 # cd example/ui-schemes
 # docker run --rm -it -p 3000:3000  -v $(pwd)/:/usr/src/nuxt-app/content/ iberdinsky/actions-ui
+# you will see something like https://silly-cat-5303aa.netlify.app/
