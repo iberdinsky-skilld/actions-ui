@@ -26,6 +26,6 @@ const closeDialog = () => {
   <jsf-shoelace .schema="props.schema" .uiSchema="props.uiSchema" .submitCallback="handleSubmit"></jsf-shoelace>
 
   <sl-dialog label="Dialog" class="dialog-overview" :open="dialog" :onSlRequestClose="closeDialog">
-    {{ dialogContent }}
+    <pre>{{ dialogContent }}</pre>
   </sl-dialog>
 </template>

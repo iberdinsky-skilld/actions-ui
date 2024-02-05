@@ -2,12 +2,11 @@
 const actions = ref([]);
 const actionsQuery = await queryContent('/').where({ title: 'Action' }).find();
 actions.value = actionsQuery;
-const snackbar = ref(false);
 
 </script>
 
 <template>
-  <v-container class="page-wrapper">
+  <div class="container">
     <h1 class="text-h4">Actions UI</h1>
     <p>
       All components (actions) by default show their arguments and options on the form as text elements. An additional UI
@@ -29,33 +28,20 @@ const snackbar = ref(false);
       https://content.nuxt.com/
 
     </p>
-    <h2 class="text-h4">Actions list</h2>
-    <v-row>
-      <v-col v-for="action in actions" :key="action" cols="12" sm="4">
-        <v-card :title="action.action.title" :subtitle="action.action.description" text="...">
-          <v-card-actions>
-            <v-btn variant="tonal" @click="snackbar = true">Run action</v-btn>
-            <v-btn :to="action._path">Review</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-  <v-snackbar v-model="snackbar">
+    <h2 class="text-h4">Components list</h2>
+    <div class="grid">
+      <template v-for="action in actions" :key="action">
+        <sl-card>
 
-    Action runned with default arguments (one day it will!)
+          <strong>{{ action.action.title }}</strong><br />
+          {{ action.action.description }}<br />
 
-    <template v-slot:actions>
-      <v-btn color="pink" variant="text" @click="snackbar = false">
-        Close
-      </v-btn>
-    </template>
-  </v-snackbar>
+          <div slot="footer" class="card__actions">
+            <sl-button variant="primary">Run action</sl-button>
+            <sl-button :href="action._path">Customize</sl-button>
+          </div>
+        </sl-card>
+      </template>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-.page-wrapper {
-  display: grid;
-  gap: 24px;
-}
-</style>

@@ -34,7 +34,7 @@ afterEach(() => {
     </sl-drawer>
 
     <header class="header">
-      <sl-button class="main-menu" variant="primary" size="large" @click=" drawerIsOpen = true">Actions list</sl-button>
+      <sl-button class="main-menu" variant="primary" size="large" @click=" drawerIsOpen = true">Components list</sl-button>
     </header>
 
     <NuxtPage></NuxtPage>

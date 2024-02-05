@@ -21,10 +21,6 @@ FROM node:21-alpine
 WORKDIR /usr/src/nuxt-app
 
 # Copy the built app from the builder stage
-# COPY --from=builder /usr/src/nuxt-app/.nuxt ./.nuxt
-# COPY --from=builder /usr/src/nuxt-app/static ./static
-# COPY --from=builder /usr/src/nuxt-app/package.json ./package.json
-# COPY --from=builder /usr/src/nuxt-app/yarn.lock ./yarn.lock
 COPY --from=builder /usr/src/nuxt-app/.output ./.output
 
 # Expose the necessary ports
