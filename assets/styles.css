@@ -1,0 +1,12 @@
+html {
+  font-family: var(--sl-font-sans);
+}
+
+.container {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 24px 5vw;
+}

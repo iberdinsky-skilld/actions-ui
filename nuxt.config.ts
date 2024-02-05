@@ -1,10 +1,5 @@
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify"
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  build: {
-    transpile: ["vuetify"]
-  },
   devtools: { enabled: false },
   ssr: false, // Disable Server Side rendering
   modules: [
@@ -14,12 +9,6 @@ export default defineNuxtConfig({
         Roboto: true,
       }
     }],
-    (_options, nuxt) => {
-      nuxt.hooks.hook("vite:extendConfig", (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    }
   ],
   content: {
     // watch: {
@@ -30,16 +19,9 @@ export default defineNuxtConfig({
     // }
     watch: false
   },
-  vite: {
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
-    },
-  },
   vue: {
     compilerOptions: {
-      isCustomElement: (tag) => ['jsf-shoelace'].includes(tag),
+      isCustomElement: (tag) => tag.startsWith('sl-') || ['jsf-shoelace'].includes(tag),
     },
   }
 })

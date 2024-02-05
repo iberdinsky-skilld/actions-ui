@@ -3,6 +3,7 @@ const actions = ref([]);
 const actionsQuery = await queryContent('/').where({ title: 'Action' }).find();
 actions.value = actionsQuery;
 const snackbar = ref(false);
+
 </script>
 
 <template>
@@ -28,7 +29,6 @@ const snackbar = ref(false);
       https://content.nuxt.com/
 
     </p>
-
     <h2 class="text-h4">Actions list</h2>
     <v-row>
       <v-col v-for="action in actions" :key="action" cols="12" sm="4">

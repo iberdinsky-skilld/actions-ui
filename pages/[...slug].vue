@@ -11,29 +11,24 @@ uiSchema.value = schemes.length ? schemes[0].uiSchema : {}
 
 </script>
 <template>
-  <v-container>
+  <div class="container">
 
     <ContentDoc v-slot="{ doc }">
       <div class="content-doc">
-        <v-expansion-panels>
-          <v-expansion-panel title="Action source">
-            <v-expansion-panel-text>
-              <pre><code>{{ doc.action }}</code></pre>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-          <v-expansion-panel title="UI Schema source">
-            <v-expansion-panel-text>
-              <pre><code>{{ uiSchema }}</code></pre>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
+
+        <sl-details summary="Action source">
+          <pre><code>{{ doc.action }}</code></pre>
+        </sl-details>
+        <sl-details summary="UI Schema source">
+          <pre><code>{{ uiSchema }}</code></pre>
+        </sl-details>
 
         <template v-if="doc.action.arguments">
           <h2 class="text-h5">Arguments</h2>
           <ActionForm :schema="{
             type: 'object',
             properties: doc.action.arguments
-          }" :uiSchema="uiSchema" />
+          }" :uiSchema="uiSchema" :actionPath="doc._file" />
         </template>
 
         <template v-if="doc.action.options">
@@ -46,7 +41,7 @@ uiSchema.value = schemes.length ? schemes[0].uiSchema : {}
       </div>
 
     </ContentDoc>
-  </v-container>
+  </div>
 </template>
 
 <style>
