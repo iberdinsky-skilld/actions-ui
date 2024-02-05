@@ -4,11 +4,6 @@ export default defineNuxtConfig({
   ssr: false, // Disable Server Side rendering
   modules: [
     "@nuxt/content",
-    ['@nuxtjs/google-fonts', {
-      families: {
-        Roboto: true,
-      }
-    }],
   ],
   content: {
     // watch: {
