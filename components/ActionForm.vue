@@ -6,16 +6,16 @@ const dialog = ref(false)
 const dialogContent = ref('');
 
 const handleSubmit = async (e) => {
-  const { data, error, pending, status } = await useFetch('/api/action', {
-    method: 'POST',
-    body: {
-      action: props.schema,
-      arguments: e,
-      file: props.actionPath,
-    }
-  })
+  // const { data, error, pending, status } = await useFetch('/api/action', {
+  //   method: 'POST',
+  //   body: {
+  //     action: props.schema,
+  //     arguments: e,
+  //     file: props.actionPath,
+  //   }
+  // })
   dialog.value = true;
-  dialogContent.value = data
+  dialogContent.value = `data`
 }
 const closeDialog = () => {
   dialog.value = false;

@@ -15,7 +15,7 @@ RUN corepack enable
 RUN yarn install && yarn build
 
 # Stage 2: Run stage
-FROM node:21-alpine
+FROM node:21-alpine as runner
 
 # Set the working directory
 WORKDIR /usr/src/nuxt-app
@@ -23,8 +23,8 @@ WORKDIR /usr/src/nuxt-app
 # Copy the built app from the builder stage
 COPY --from=builder /usr/src/nuxt-app/.output ./.output
 
-# Expose the necessary ports
-EXPOSE 3000 4000
+# Expose the necessary ports (this is more for documentation)
+EXPOSE 3000
 
 # Set environment variables
 ENV NUXT_PORT=3000

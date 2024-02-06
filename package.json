@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4",
     "nuxt": "^3.10.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
@@ -19,6 +20,9 @@
     "@jsfe/form": "^0.3.1",
     "@jsfe/shoelace": "^0.3.1",
     "@nuxt/content": "^2.11.0",
-    "@shoelace-style/shoelace": "^2.13.1"
+    "@originjs/vite-plugin-content": "^1.0.5",
+    "@shoelace-style/shoelace": "^2.13.1",
+    "js-yaml": "^4.1.0",
+    "swagger-ui": "^5.11.2"
   }
 }

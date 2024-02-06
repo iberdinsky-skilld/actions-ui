@@ -2,7 +2,6 @@
 const actions = ref([]);
 const actionsQuery = await queryContent('/').where({ title: 'Action' }).find();
 actions.value = actionsQuery;
-
 </script>
 
 <template>
