@@ -31,7 +31,7 @@ action.value = actions.value.find((element) => JSON.stringify(element._path) ===
         <ActionForm :schema="{
           type: 'object',
           properties: action.data.action.options
-        }" :uiSchema="action.schema.uiSchema" />
+        }" :uiSchema="action.schema.uiSchema" :actionPath="action._path"/>
       </template>
     </div>
 

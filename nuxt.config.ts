@@ -16,18 +16,5 @@ export default defineNuxtConfig({
     experimental: {
       openAPI: true
     }
-  },
-  modules: [
-    'nuxt-socket-io',
-  ],
-  io: {
-    sockets: [ // Required
-      { // At least one entry is required
-        name: 'home',
-        url: 'http://localhost:3000',
-        default: true,
-        namespaces: { /* see section below */ }
-      },
-    ]
   }
 })
