@@ -1,6 +1,0 @@
-uiSchema:
-  # UI schema
-  buttonGroup:
-    'ui:widget': button
-  radio:
-    'ui:widget': radio

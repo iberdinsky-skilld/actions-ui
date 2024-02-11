@@ -1,46 +1,41 @@
 <script setup>
-
-const uiSchema = ref({})
-const schemaRoute = ref([])
+const actions = useState('actions')
+const action = ref({})
 const route = useRoute()
-schemaRoute.value = route.params.slug
-schemaRoute.value[schemaRoute.value.length - 1] = "ui-schema"
-const schemes = await queryContent(...schemaRoute.value).find()
 
-uiSchema.value = schemes.length ? schemes[0].uiSchema : {}
-
+action.value = actions.value.find((element) => JSON.stringify(element._path) === JSON.stringify(route.params.slug))
 </script>
 <template>
   <div class="container">
 
-    <ContentDoc v-slot="{ doc }">
-      <div class="content-doc">
 
-        <sl-details summary="Action source">
-          <pre><code>{{ doc.action }}</code></pre>
-        </sl-details>
-        <sl-details summary="UI Schema source">
-          <pre><code>{{ uiSchema }}</code></pre>
-        </sl-details>
+    <div class="content-doc">
 
-        <template v-if="doc.action.arguments">
-          <h2 class="text-h5">Arguments</h2>
-          <ActionForm :schema="{
-            type: 'object',
-            properties: doc.action.arguments
-          }" :uiSchema="uiSchema" :actionPath="doc._file" />
-        </template>
+      <sl-details summary="Action source">
+        <pre><code>{{ action.data }}</code></pre>
+      </sl-details>
+      <sl-details summary="UI Schema source">
+        <pre><code>{{ action.schema }}</code></pre>
+      </sl-details>
 
-        <template v-if="doc.action.options">
-          <h2 class="text-h5">Options</h2>
-          <ActionForm :schema="{
-            type: 'object',
-            properties: doc.action.options
-          }" :uiSchema="uiSchema" />
-        </template>
-      </div>
+      <template v-if="action.data.action.arguments">
+        <h2 class="text-h5">Arguments</h2>
+        <ActionForm :schema="{
+          type: 'object',
+          properties: action.data.action.arguments
+        }" :uiSchema="action.schema.uiSchema" :actionPath="action._path" />
+      </template>
 
-    </ContentDoc>
+      <template v-if="action.data.action.options">
+        <h2 class="text-h5">Options</h2>
+        <ActionForm :schema="{
+          type: 'object',
+          properties: action.data.action.options
+        }" :uiSchema="action.schema.uiSchema" />
+      </template>
+    </div>
+
+
   </div>
 </template>
 

@@ -1,6 +1,0 @@
-uiSchema:
-  # UI schema
-  range:
-    'ui:widget': range
-  rangeConstrained:
-    'ui:widget': range

@@ -5,9 +5,11 @@ import "~/assets/styles.css"
 import burger from "~/assets/burger.svg"
 
 const drawerIsOpen = ref(false)
-const actions = ref([])
-const actionsQuery = await queryContent("/").where({ title: "Action" }).find()
-actions.value = actionsQuery
+
+const actions = useState('actions')
+await callOnce(async () => {
+  actions.value = await $fetch('/api/actions-list')
+})
 
 const { afterEach } = useRouter()
 
@@ -17,16 +19,12 @@ afterEach(() => {
 </script>
 <template>
   <NuxtLayout>
-    <sl-drawer
-      placement="start"
-      class="drawer-placement-start"
-      :open="drawerIsOpen"
-      :onSlAfterHide="() => (drawerIsOpen = false)"
-    >
+    <sl-drawer placement="start" class="drawer-placement-start" :open="drawerIsOpen"
+      :onSlAfterHide="() => (drawerIsOpen = false)">
       <sl-menu>
         <sl-menu-label>Actions</sl-menu-label>
-        <sl-menu-item v-for="link of actions" @click="navigateTo(link._path)">
-          {{ link?.action?.title }}
+        <sl-menu-item v-for="link of actions" @click="navigateTo(`/${link._path.join('/')}`)">
+          {{ link?.data?.action?.title }}
         </sl-menu-item>
       </sl-menu>
 
@@ -39,12 +37,7 @@ afterEach(() => {
     </sl-drawer>
 
     <header class="header">
-      <sl-button
-        class="main-menu"
-        size="large"
-        @click="drawerIsOpen = true"
-        circle
-      >
+      <sl-button class="main-menu" size="large" @click="drawerIsOpen = true" circle>
         <sl-icon :src="burger"></sl-icon>
       </sl-button>
     </header>

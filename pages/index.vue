@@ -1,7 +1,5 @@
 <script setup>
-const actions = ref([]);
-const actionsQuery = await queryContent('/').where({ title: 'Action' }).find();
-actions.value = actionsQuery;
+const actions = useState('actions')
 </script>
 
 <template>
@@ -32,12 +30,12 @@ actions.value = actionsQuery;
       <template v-for="action in actions" :key="action">
         <sl-card>
 
-          <strong>{{ action.action.title }}</strong><br />
-          {{ action.action.description }}<br />
+          <strong>{{ action.data.action.title }}</strong><br />
+          {{ action.data.action.description }}<br />
 
           <div slot="footer" class="card__actions">
             <sl-button variant="primary">Run action</sl-button>
-            <sl-button :href="action._path">Customize</sl-button>
+            <sl-button :href="`/${action._path.join('/')}`">Customize</sl-button>
           </div>
         </sl-card>
       </template>
